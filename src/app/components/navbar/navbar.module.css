@@ -8,8 +8,11 @@
 .logo {
       font-size: 24px;
       font-weight: bold;
-      color: #707070;
+      color: #d3d3d3;
       text-decoration: none;
+      left: -50px;
+      top:10px;
+      position: relative;
 }
 
 .linkContainer {
@@ -21,7 +24,7 @@
 .logoutButton{
       padding: 5px;
       border:none;
-      background-color: #53c28b;
+      background-color: #ffffff;
       color: #333333;
       cursor: pointer;
       border-radius: 5px;

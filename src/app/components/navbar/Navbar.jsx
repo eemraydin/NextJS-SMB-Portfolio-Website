@@ -2,6 +2,7 @@
 import React from "react";
 import Link from "next/link";
 import styles from "./navbar.module.css";
+import Image from "next/image";
 
 const links = [
   {
@@ -40,7 +41,7 @@ function Navbar() {
   return (
     <div className={styles.container}>
       <Link href="/" className={styles.logo}>
-        EmreDev Logo
+        <Image src={"/logoTransparent.png"} alt="logo" width={200} height={200} />
       </Link>
       <div className={styles.linkContainer}>
         {links.map((link) => (
