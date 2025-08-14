@@ -18,6 +18,7 @@
   height: 400px;
   position: relative;
   background-size: cover !important;
+  color: white;
 }
 
 .item:nth-child(1) {
