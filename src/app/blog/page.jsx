@@ -3,71 +3,34 @@ import styles from "./page.module.css";
 import Image from "next/image";
 import Link from "next/link";
 
-const Blog = () => {
+export default async function Blog() {
+  const data = await fetch("https://jsonplaceholder.typicode.com/posts", {
+    // next:
+    //  {
+    //   revalidate: 60, // Revalidate every 60 seconds
+    // },
+    cache: "no-store", // Disable caching for this request
+  });
+  const posts = await data.json();
   return (
     <div className={styles.mainContainer}>
-      <Link href="/blog/testId" className={styles.container}>
-        <div className={styles.imageContainer}>
-          <Image
-            src="/main.jpg"
-            alt=""
-            width={400}
-            height={250}
-            className={styles.image}
-          />
-        </div>
-        <div className={styles.content}>
-          <h1 className={styles.title}>Title</h1>
-          <p className={styles.desc}>Description</p>
-        </div>
-      </Link>
-      <Link href="/testId" className={styles.container}>
-        <div className={styles.imageContainer}>
-          <Image
-            src="/main.jpg"
-            alt=""
-            width={400}
-            height={250}
-            className={styles.image}
-          />
-        </div>
-        <div className={styles.content}>
-          <h1 className={styles.title}>Title</h1>
-          <p className={styles.desc}>Description</p>
-        </div>
-      </Link>
-      <Link href="/testId" className={styles.container}>
-        <div className={styles.imageContainer}>
-          <Image
-            src="/main.jpg"
-            alt=""
-            width={400}
-            height={250}
-            className={styles.image}
-          />
-        </div>
-        <div className={styles.content}>
-          <h1 className={styles.title}>Title</h1>
-          <p className={styles.desc}>Description</p>
-        </div>
-      </Link>
-      <Link href="/testId" className={styles.container}>
-        <div className={styles.imageContainer}>
-          <Image
-            src="/main.jpg"
-            alt=""
-            width={400}
-            height={250}
-            className={styles.image}
-          />
-        </div>
-        <div className={styles.content}>
-          <h1 className={styles.title}>Title</h1>
-          <p className={styles.desc}>Description</p>
-        </div>
-      </Link>
+      {posts.map((post) => (
+        <Link href={`/blog/${post.id}`} className={styles.container} key={post.id}>
+          <div className={styles.imageContainer}>
+            <Image
+              src="/main.jpg"
+              alt=""
+              width={400}
+              height={250}
+              className={styles.image}
+            />
+          </div>
+          <div className={styles.content}>
+            <h1 className={styles.title}>{post.title}</h1>
+            <p className={styles.desc}>{post.body}</p>
+          </div>
+        </Link>
+      ))}
     </div>
   );
-};
-
-export default Blog;
+}
