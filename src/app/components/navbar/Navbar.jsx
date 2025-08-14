@@ -3,6 +3,8 @@ import React from "react";
 import Link from "next/link";
 import styles from "./navbar.module.css";
 import Image from "next/image";
+import { DarkModeToggle } from "../darkModeToggle/DarkModeToggle";
+import { ThemeContext } from "@/context/ThemeContext";
 
 const links = [
   {
@@ -38,12 +40,20 @@ const links = [
 ];
 
 function Navbar() {
+  const { mode } = React.useContext(ThemeContext);
   return (
     <div className={styles.container}>
       <Link href="/" className={styles.logo}>
-        <Image src={"/logoTransparent.png"} alt="logo" width={200} height={200} />
+        <Image
+          src={mode === "dark" ? "/logoTransparent.png" : "/logo.svg"}
+          alt="logo"
+          width={200}
+          height={200}
+        />
       </Link>
+
       <div className={styles.linkContainer}>
+        <DarkModeToggle />
         {links.map((link) => (
           <Link key={link.id} href={link.href} className={styles.link}>
             {link.title}
