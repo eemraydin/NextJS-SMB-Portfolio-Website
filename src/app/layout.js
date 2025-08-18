@@ -3,7 +3,7 @@ import "./globals.css";
 import { Inter, Roboto, Poppins } from "next/font/google";
 import Navbar from "../components/navbar/Navbar";
 import Footer from "../components/footer/Footer";
-import { ThemeProvider } from "@/context/ThemeContext";
+import { ThemeProvider } from "@/src/context/ThemeContext";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",

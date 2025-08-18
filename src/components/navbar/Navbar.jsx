@@ -4,7 +4,7 @@ import Link from "next/link";
 import styles from "./navbar.module.css";
 import Image from "next/image";
 import { DarkModeToggle } from "../darkModeToggle/DarkModeToggle";
-import { ThemeContext } from "@/context/ThemeContext";
+import { ThemeContext } from "@/src/context/ThemeContext";
 
 const links = [
   {

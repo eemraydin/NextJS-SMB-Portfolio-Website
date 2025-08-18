@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 export default async function Blog() {
-  const data = await fetch("https://jsonplaceholder.typicode.com/posts", {
+  const data = await fetch("http://localhost:3000/api/posts", {
     // next:
     //  {
     //   revalidate: 60, // Revalidate every 60 seconds
@@ -15,7 +15,7 @@ export default async function Blog() {
   return (
     <div className={styles.mainContainer}>
       {posts.map((post) => (
-        <Link href={`/blog/${post.id}`} className={styles.container} key={post.id}>
+        <Link href={`/blog/${post._id}`} className={styles.container} key={post._id}>
           <div className={styles.imageContainer}>
             <Image
               src="/main.jpg"
