@@ -26,13 +26,14 @@ a {
 
 .light {
   background-color: white;
-  color: #111;
+  color: #4b4b4b;
 }
+
 .dark {
-    background-color: #03120d;
+  background-color: #03120d;
   color: #d3d3d3;
 }
 
-.theme{
+.theme {
   transition: 1s all ease;
 }

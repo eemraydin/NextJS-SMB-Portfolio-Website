@@ -2,28 +2,33 @@ import React from "react";
 import styles from "./page.module.css";
 import Image from "next/image";
 
-export default async function BlogPost({ params }) {
-  const receiveParams = await params;
-  const getId = receiveParams.id;
-  const data = await fetch(
-    `https://jsonplaceholder.typicode.com/posts/${getId}`,
-    {
-      // next:
-      //  {
-      //   revalidate: 60, // Revalidate every 60 seconds
-      // },
-      cache: "no-store", // Disable caching for this request
-    }
-  );
-  const posts = await data.json();
+export async function generateMetadata({ params }) {
+  const post = await getData(params.id);
+  return {
+    title: `Emredev - ${post.title}`,
+    description: post.desc,
+  };
+}
+
+async function getData(id) {
+  const res = await fetch(`http://localhost:3000/api/posts/${id}`, {
+    cache: "no-store", // Disable caching for this request
+  });
+
+  return res.json();
+}
+
+const BlogPost = async ({ params }) => {
+  const data = await getData(params.id);
+
   return (
     <div className={styles.container}>
       <div className={styles.top}>
         <div className={styles.info}>
           <h1 className={styles.title}>
-            {posts.title} - {posts.id}
+            {data.title} - {data.id}
           </h1>
-          <p className={styles.desc}>{posts.body}</p>
+          <p className={styles.desc}>{data.body}</p>
           <div className={styles.author}>
             <Image
               src="/main.jpg"
@@ -32,21 +37,18 @@ export default async function BlogPost({ params }) {
               height={40}
               className={styles.avatar}
             />
-            <span className={styles.username}>name</span>
+            <span className={styles.username}>{data.username}</span>
           </div>
         </div>
         <div className={styles.imageContainer}>
-          <Image src="/main.jpg" alt="" className={styles.image} fill={true} />
+          <Image src={data.img} alt="" className={styles.image} fill={true} />
         </div>
       </div>
       <div className={styles.content}>
-        <p className={styles.text}>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur,
-          placeat! Quod quas quibusdam nostrum ducimus natus sunt, sit aperiam
-          saepe soluta mollitia blanditiis non commodi at labore modi eaque
-          debitis!
-        </p>
+        <p className={styles.text}>{data.content}</p>
       </div>
     </div>
   );
-}
+};
+
+export default BlogPost;

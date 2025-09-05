@@ -13,7 +13,7 @@
 
 .title {
   font-size: 72px;
-  background: linear-gradient(to bottom, #185b48, #d3d3d3);
+  background: linear-gradient(to bottom, #185b48, #4b4b4b);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -39,5 +39,5 @@
 .description {
   font-size: 24px;
   font-weight: 300;
-  color: #d3d3d3;
+  color: #4b4b4b;
 }
