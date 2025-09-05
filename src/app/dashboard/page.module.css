@@ -1,0 +1,210 @@
+.container {
+    display: flex;
+    gap: 40px;
+    align-items: flex-start;
+    padding: 20px;
+    background-color: transparent;
+    min-height: 100vh;
+    box-sizing: border-box;
+    font-family: sans-serif;
+}
+
+/* LEFT SIDE - POSTS */
+.posts {
+    flex: 2;
+    display: flex;
+    flex-direction: column;
+    background-color: transparent;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    max-height: 85vh;
+    overflow-y: auto;
+    overflow-wrap: anywhere;
+}
+
+.postsTitle {
+    position: sticky;
+    top: 0;
+    padding: 15px 0;
+    font-size: 22px;
+    font-weight: 600;
+    border-bottom: 1px solid #eee;
+    z-index: 10;
+}
+
+/* INDIVIDUAL POST CARD */
+.post {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    background-color: transparent;
+    border-bottom: 3px solid #eee;
+    padding: 15px;
+
+    margin-top: 15px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.post:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.06);
+}
+
+.imgContainer {
+    width: 150px;
+    height: 90px;
+    border-radius: 8px;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.img {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+}
+
+/* DELETE BUTTON */
+.delete {
+    cursor: pointer;
+    background: #ff6b6b;
+    color: #fff;
+    border: none;
+    padding: 6px 10px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 600;
+    transition: background 0.2s ease;
+}
+
+.delete:hover {
+    background: #ff4b4b;
+}
+
+/* RIGHT SIDE - FORM */
+.new {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    background-color: transparent;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    align-self: flex-start;
+}
+
+.new h1 {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.input,
+.textArea {
+    padding: 12px;
+    border: 1.5px solid #ddd;
+    border-radius: 8px;
+    font-size: 16px;
+    background-color: transparent;
+    outline: none;
+    transition: border 0.2s ease;
+    color: #ddd;
+}
+
+.input:focus,
+.textArea:focus {
+    border: 1.5px solid #185b48;
+
+}
+
+.textArea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+.button {
+    padding: 14px;
+    cursor: pointer;
+    background-color: #185b48;
+    border: none;
+    border-radius: 8px;
+    color: #fff;
+    font-size: 16px;
+    font-weight: 600;
+    transition: background 0.2s ease;
+}
+
+.button:hover {
+    background-color: #46a576;
+}
+
+.popup {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background-color: #082d21;
+    color: #fff;
+    padding: 12px 20px;
+    border-radius: 8px;
+    font-weight: bold;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    animation: fadeOut 3s forwards;
+    z-index: 1000;
+}
+
+@keyframes fadeOut {
+    0% {
+        opacity: 1;
+    }
+
+    80% {
+        opacity: 0.8;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+/* Mobile / small screens */
+@media (max-width: 1080px) {
+    .container {
+        flex-direction: column;
+        /* Stack posts and form vertically */
+        gap: 20px;
+        padding: 15px;
+    }
+
+    .posts {
+        max-height: none;
+        /* let it expand naturally */
+        padding: 15px;
+    }
+
+    .post {
+        flex-direction: column;
+        /* Stack image and text vertically */
+        align-items: flex-start;
+    }
+
+    .imgContainer {
+        width: 100%;
+        height: 150px;
+        /* taller for mobile */
+        margin-bottom: 10px;
+    }
+
+    .delete {
+        align-self: flex-end;
+        /* Delete button stays at top right of the card */
+        margin-top: 10px;
+    }
+
+    .new {
+        width: 100%;
+        padding: 15px;
+    }
+}

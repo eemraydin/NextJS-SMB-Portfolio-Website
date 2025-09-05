@@ -2,6 +2,7 @@
   box-sizing: border-box;
   padding: 0;
   margin: 0;
+
 }
 
 body {
@@ -29,7 +30,8 @@ a {
   color: #4b4b4b;
 }
 
-.light input{
+.light input,
+.light textarea {
   border: 1px solid #4b4b4b;
   color: #4b4b4b;
   background-color: transparent;
@@ -40,8 +42,12 @@ a {
   color: #d3d3d3;
 }
 
-.dark input::placeholder{
+.dark input::placeholder {
   color: #d3d3d3;
+}
+
+.dark textarea::placeholder {
+  color: #d3d3d3
 }
 
 

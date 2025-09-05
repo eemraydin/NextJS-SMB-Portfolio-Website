@@ -1,49 +1,77 @@
 "use client";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./page.module.css";
-import { signIn } from "next-auth/react";
+import { getProviders, signIn, useSession } from "next-auth/react";
+import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
-const Login = () => {
-  const handleSubmit = async (e) => {
+
+const Login = ({ url }) => {
+  const session = useSession();
+  const router = useRouter();
+  const params = useSearchParams();
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
+
+  useEffect(() => {
+    setError(params.get("error"));
+    setSuccess(params.get("success"));
+  }, [params]);
+
+  useEffect(() => {
+    if (session.status === "authenticated") {
+      router.push("/dashboard");
+    }
+  }, [session.status, router]);
+
+  // Show loading while session is loading or redirecting
+  if (session.status === "loading" || session.status === "authenticated") {
+    return <p>Loading...</p>;
+  }
+
+  const handleSubmit = (e) => {
     e.preventDefault();
     const email = e.target[0].value;
     const password = e.target[1].value;
-    try {
-      await signIn("credentials", {
-        email,
-        password,
-        callbackUrl: "/dashboard",
-      });
-    } catch (err) {
-      console.log(err);
-    }
+
+    signIn("credentials", {
+      email,
+      password,
+    });
   };
 
   return (
     <div className={styles.container}>
-      <button onClick={() => signIn("google", { redirectTo: "/dashboard" })}>
-        Click to login
+      <h1 className={styles.title}>{success ? success : "Welcome Back"}</h1>
+      <h3 className={styles.subtitle}>Please sign in to see the dashboard.</h3>
+
+      <form onSubmit={handleSubmit} className={styles.form}>
+        <input
+          type="text"
+          placeholder="Email"
+          required
+          className={styles.input}
+        />
+        <input
+          type="password"
+          placeholder="Password"
+          required
+          className={styles.input}
+        />
+        <button className={styles.button}>Login</button>
+        {error && error}
+      </form>
+      <button
+        onClick={() => {
+          signIn("google");
+        }}
+        className={styles.button + " " + styles.google}
+      >
+        Login with Google
       </button>
-      <div className={styles.container}>
-        <form className={styles.form} onSubmit={handleSubmit}>
-          <input
-            type="email"
-            placeholder="email"
-            className={styles.input}
-            required
-          />
-          <input
-            type="password"
-            placeholder="password"
-            className={styles.input}
-            required
-          />
-          <button className={styles.button}>Login</button>
-        </form>
-        <Link href="/dashboard/login" className={styles.link}>
-          Already have an account? Login
-        </Link>
-      </div>
+      <span className={styles.or}>- OR -</span>
+      <Link className={styles.link} href="/dashboard/register">
+        Create new account
+      </Link>
     </div>
   );
 };

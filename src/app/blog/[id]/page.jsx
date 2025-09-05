@@ -3,7 +3,8 @@ import styles from "./page.module.css";
 import Image from "next/image";
 
 export async function generateMetadata({ params }) {
-  const post = await getData(params.id);
+  const param = await params;
+  const post = await getData(param.id);
   return {
     title: `Emredev - ${post.title}`,
     description: post.desc,
@@ -19,7 +20,8 @@ async function getData(id) {
 }
 
 const BlogPost = async ({ params }) => {
-  const data = await getData(params.id);
+  const param = await params;
+  const data = await getData(param.id);
 
   return (
     <div className={styles.container}>
