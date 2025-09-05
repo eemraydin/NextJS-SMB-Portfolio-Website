@@ -29,10 +29,22 @@ a {
   color: #4b4b4b;
 }
 
+.light input{
+  border: 1px solid #4b4b4b;
+  color: #4b4b4b;
+  background-color: transparent;
+}
+
 .dark {
   background-color: #03120d;
   color: #d3d3d3;
 }
+
+.dark input::placeholder{
+  color: #d3d3d3;
+}
+
+
 
 .theme {
   transition: 1s all ease;
